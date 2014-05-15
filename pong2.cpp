@@ -84,9 +84,24 @@ void Ball::setDestinationX(int x)
     this -> destinationX = x;
 }
 
-void Ball::setDestinationY(int y)
+void Ball::setDestinationY()
 {
-    this -> destinationY = y;
+    if(destinationY < currentY)
+        destinationY = abs(currentY - slopeY);
+    else
+        destinationY = abs(slopeY - currentY);
+
+    destinationY = abs(destinationY - SCREEN_HEIGHT);
+}
+
+void Ball::setDestinationYIndividually(int y,int midPoint)
+{
+    if(currentY < midPoint)//above middle - move up
+    {
+        destinationY = destinationY - y;
+    }
+    else
+        destinationY = destinationY + y;
 }
 
 
@@ -95,14 +110,14 @@ void Ball::findSlope()
     int bigger = 0;
 
     if(destinationX < currentX)
-        slopeX = currentX - destinationX;
+        slopeX = abs(currentX - destinationX);
     else
-        slopeX = destinationX - currentX;
+        slopeX = abs(destinationX - currentX);
 
-    if(destinationY < currentX)
-        slopeY = currentY - destinationY;
+    if(destinationY < currentY)
+        slopeY = abs(currentY - destinationY);
     else
-        slopeY = destinationY - currentY;
+        slopeY = abs(destinationY - currentY);
 
     if(slopeX < slopeY)
         bigger = slopeY;
@@ -131,7 +146,7 @@ void Ball::moveBall(SDL_Renderer* gRenderer, SDL_Rect &ballRect)
             {
                 if(currentY != destinationY && a == slopeY)
                 {
-                    currentY--;
+                    currentY = currentY - slopeY;
                     ballRect.x = currentX;
                     ballRect.y = currentY;
                     renderBall(gRenderer,ballRect);
@@ -144,7 +159,7 @@ void Ball::moveBall(SDL_Renderer* gRenderer, SDL_Rect &ballRect)
             {
                 if(currentY != destinationY && b == slopeY)
                 {
-                    currentY++;
+                    currentY = currentY + slopeY;
                     ballRect.x = currentX;
                     ballRect.y = currentY;
                     renderBall(gRenderer,ballRect);
@@ -162,7 +177,7 @@ void Ball::moveBall(SDL_Renderer* gRenderer, SDL_Rect &ballRect)
             {
                 if(currentY < destinationY && c == slopeY)
                 {
-                    currentY--;
+                    currentY = currentY - slopeY;
                     ballRect.y = currentY;
                     renderBall(gRenderer,ballRect);
                     return;
@@ -175,7 +190,7 @@ void Ball::moveBall(SDL_Renderer* gRenderer, SDL_Rect &ballRect)
             {
                 if(currentY != destinationY && d == slopeY)
                 {
-                    currentY++;
+                    currentY = currentY + slopeY;
                     ballRect.y = currentY;
                     renderBall(gRenderer,ballRect);
                     return;
@@ -324,6 +339,7 @@ void Paddle::moveRightPaddle(SDL_Event& e,SDL_Rect &rightPaddleRect,SDL_Renderer
                 {
                     topY = topY - speed;
                     bottomY = topY + HEIGHT;
+                    midPaddle = topY + (HEIGHT/2);
                     rightPaddleRect.x = X;
                     rightPaddleRect.y = topY;
                 }
@@ -334,6 +350,7 @@ void Paddle::moveRightPaddle(SDL_Event& e,SDL_Rect &rightPaddleRect,SDL_Renderer
                 {
                     topY = topY + speed;
                     bottomY = topY + HEIGHT;
+                    midPaddle = topY + (HEIGHT/2);
                     rightPaddleRect.x = X;
                     rightPaddleRect.y = topY;
                 }

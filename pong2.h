@@ -38,7 +38,8 @@ public:
     void resetBall(int desitinationX);
     void setDestinationXandY();
     void setDestinationX(int x);
-    void setDestinationY(int y);
+    void setDestinationY();
+    void setDestinationYIndividually(int y,int midPoint);
     void findSlope();
     void moveBall(SDL_Renderer* gRenderer, SDL_Rect &ballRect);
     void renderBall(SDL_Renderer* gRenderer, SDL_Rect &ballRect);
