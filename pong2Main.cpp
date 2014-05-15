@@ -147,6 +147,7 @@ void writeTest(Ball gameBall,Paddle rPaddle,Paddle lPaddle)
 {
     cout << "Ball:" << endl;
     cout << "   Current X: " << gameBall.getCurrentX() << endl;
+    cout << "   X of right side: " << gameBall.getCurrentX()+ gameBall.getWidth() << endl;
     cout << "   Current Y: " << gameBall.getCurrentY() << endl;
     cout << "   Destination X: " << gameBall.getDestinationX() << endl;
     cout << "   Destination Y: " << gameBall.getDestinationY() << endl;
@@ -173,7 +174,7 @@ void checkCollision(Ball &gameBall,Paddle rPaddle, Paddle lPaddle)
     bool topWallBlock = false;
     bool bottomWallBlock = false;
     int rightOfBall = gameBall.getCurrentX() + gameBall.getWidth();
-    int bottomOfBall = gameBall.getCurrentX() + gameBall.getHeight();
+    int bottomOfBall = gameBall.getCurrentY() + gameBall.getHeight();
     int rightOfLeftPaddle = lPaddle.getX() + lPaddle.getWidth();
     int rightOfRightPaddle = rPaddle.getX() + rPaddle.getWidth();
 
@@ -189,13 +190,13 @@ void checkCollision(Ball &gameBall,Paddle rPaddle, Paddle lPaddle)
         gameBall.resetBall(0);
         return;
     }
-    else if(bottomOfBall >= SCREEN_HEIGHT)
+    if(bottomOfBall >= SCREEN_HEIGHT)
     {
         bottomWallBlock = true;
         moveAfterCollision(gameBall,rightPaddleBlocked,leftPaddleBlocked,topWallBlock,bottomWallBlock,rPaddle,lPaddle);
 
     }
-    else if(gameBall.getCurrentX() <= 0)
+    else if(gameBall.getCurrentY() <= 0)
     {
         topWallBlock = true;
         moveAfterCollision(gameBall,rightPaddleBlocked,leftPaddleBlocked,topWallBlock,bottomWallBlock,rPaddle,lPaddle);
@@ -203,38 +204,32 @@ void checkCollision(Ball &gameBall,Paddle rPaddle, Paddle lPaddle)
     }
     else
     {
-        if(gameBall.getCurrentX() >= rPaddle.getX() && gameBall.getCurrentX() <= rightOfRightPaddle)
+        //right paddle
+        if(rightOfBall >= rPaddle.getX() && gameBall.getCurrentX() <= rPaddle.getX()+rPaddle.getWidth())
         {
-            if(gameBall.getCurrentY() >= rPaddle.getTopY() && gameBall.getCurrentY() <= rPaddle.getBottomY())
+            if((gameBall.getCurrentY() >= rPaddle.getTopY() && gameBall.getCurrentY() <= rPaddle.getBottomY()) ||
+                (bottomOfBall >= rPaddle.getTopY() && bottomOfBall <= rPaddle.getBottomY()))
             {
                 rightPaddleBlocked = true;
                 moveAfterCollision(gameBall,rightPaddleBlocked,leftPaddleBlocked,topWallBlock,bottomWallBlock,rPaddle,lPaddle);
             }
         }
 
-
-
-
-
-
-
-
-
-
-        for(int c = gameBall.getCurrentX(); c < rightOfBall; c++)
+        //left paddle
+        if(gameBall.getCurrentX() >= lPaddle.getX() && gameBall.getCurrentX() <= lPaddle.getX()+lPaddle.getWidth())
         {
-            for(int d = lPaddle.getX(); d < rightOfLeftPaddle; d++)
+            if((gameBall.getCurrentY() >= lPaddle.getTopY() && gameBall.getCurrentY() <= lPaddle.getBottomY()) ||
+               (bottomOfBall >= lPaddle.getTopY() && bottomOfBall <= lPaddle.getBottomY()))
             {
-                if(c == d)
-                {
-                    leftPaddleBlocked = true;
-                    moveAfterCollision(gameBall,rightPaddleBlocked,leftPaddleBlocked,topWallBlock,bottomWallBlock,rPaddle,lPaddle);
-                }
+                leftPaddleBlocked = true;
+                moveAfterCollision(gameBall,rightPaddleBlocked,leftPaddleBlocked,topWallBlock,bottomWallBlock,rPaddle,lPaddle);
+                return;
             }
         }
     }
 
     moveAfterCollision(gameBall,rightPaddleBlocked,leftPaddleBlocked,topWallBlock,bottomWallBlock,rPaddle,lPaddle);
+
 }
 
 void moveAfterCollision(Ball &gameBall, bool rightPaddleBlocked, bool leftPaddleBlocked, bool topWallBlocked, bool bottomWallBlocked,
@@ -285,13 +280,13 @@ void moveAfterCollision(Ball &gameBall, bool rightPaddleBlocked, bool leftPaddle
             else
                 gameBall.setDestinationY(gameBall.getCurrentY() - distanceFromMidRight);
         }
-        else if(gameBall.getCurrentY() > rPaddle.getMidPaddle())
+        else if(gameBall.getCurrentY() >= rPaddle.getTopY() && gameBall.getCurrentY() <= rPaddle.getMidPaddle())
         {
-            gameBall.setDestinationY(gameBall.getCurrentY() - distanceFromMidRight);
+            gameBall.setDestinationY(gameBall.getCurrentY() - (distanceFromMidRight * 5));
         }
         else if(gameBall.getCurrentY() < rPaddle.getMidPaddle())
         {
-            gameBall.setDestinationY(gameBall.getCurrentY() + distanceFromMidRight);
+            gameBall.setDestinationY(gameBall.getCurrentY() - (distanceFromMidRight * 5));
         }
     }
     else if(leftPaddleBlocked == true)
@@ -401,14 +396,19 @@ int main( int argc, char* args[] )
                             SDL_RenderDrawPoint( gRenderer, SCREEN_WIDTH / 2, i );
                         }
 
+                        leftPaddle.moveLeftPaddle(gameBall,leftPaddleRect);
                         rightPaddle.moveRightPaddle(e,rightPaddleRect,gRenderer,leftPaddle,gameBall,leftPaddleRect,ballRect);
                         gameBall.moveBall(gRenderer,ballRect);
+                        leftPaddle.moveLeftPaddle(gameBall,leftPaddleRect);
 
                         gameBall.renderBall(gRenderer,ballRect);
                         leftPaddle.renderPaddle(gRenderer,leftPaddleRect);
                         rightPaddle.renderPaddle(gRenderer,rightPaddleRect);
 
                         checkCollision(gameBall,rightPaddle,leftPaddle);
+                        leftPaddle.moveLeftPaddle(gameBall,leftPaddleRect);
+                        leftPaddle.renderPaddle(gRenderer,leftPaddleRect);
+
 
                     }//end of while e has pollevent
 

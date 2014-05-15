@@ -23,7 +23,7 @@ int Ball::getCurrentX()
 
 int Ball::getCurrentY()
 {
-    return destinationY;
+    return currentY;
 }
 
 int Ball::getDestinationX()
@@ -48,10 +48,6 @@ int Ball::getSlopeY()
 
 int Ball::getDistanceX()
 {
-    if(currentX < destinationX)
-        distanceX = currentX - destinationX;
-    else
-        distanceX = destinationX - currentX;
     return distanceX;
 }
 
@@ -290,45 +286,22 @@ void Paddle::renderPaddle(SDL_Renderer* gRenderer,SDL_Rect &paddleRect)
 
 void Paddle::moveLeftPaddle(Ball gameBall,SDL_Rect &leftPaddleRect)
 {
-    destinationY = gameBall.getDestinationY();
-
-    if(gameBall.getDestinationX() == 0)
+    if(gameBall.getCurrentY() < topY & topY >= 0)
     {
-        if(destinationY < topY)//ball moving above paddle
-        {
-            topY = topY - speed;
-            bottomY = topY + HEIGHT;
-            midPaddle = topY + (HEIGHT/2);
-            leftPaddleRect.y = topY;
-
-        }
-        else//ball moving below paddle
-        {
-            topY = topY + speed;
-            bottomY = topY + HEIGHT;
-            midPaddle = topY + (HEIGHT/2);
-            leftPaddleRect.y = topY;
-        }
+        topY = topY - (speed/2);
+        bottomY = topY + HEIGHT;
+        midPaddle = topY + (HEIGHT/2);
+        leftPaddleRect.y = topY;
+        if(gameBall.getCurrentY() >= topY && gameBall.getCurrentY() <= bottomY)
+            return;
     }
-    else if(gameBall.getDestinationX() != 0)
+    else if(gameBall.getCurrentY() > topY && bottomY <= SCREEN_HEIGHT)
     {
-        setSpeed(getSpeed()/2);
-        if(randomDirection == 1)//move down at half speed
-        {
-            if(bottomY + speed <= SCREEN_HEIGHT)
-                topY = topY - speed;
-                bottomY = topY + HEIGHT;
-                midPaddle = topY + (HEIGHT/2);
-                leftPaddleRect.y = topY;
-        }
-        else//move up at half speed
-        {
-            if(getTopY() - getSpeed() >= 0)
-                topY = topY + speed;
-                bottomY = topY + HEIGHT;
-                midPaddle = topY + (HEIGHT/2);
-                leftPaddleRect.y = topY;
-        }
+        topY = topY + (speed/2);
+        bottomY = topY + HEIGHT;
+        midPaddle = topY + (HEIGHT/2);
+        if(gameBall.getCurrentY() >= topY && gameBall.getCurrentY() <= bottomY)
+            return;
     }
 }
 
@@ -342,8 +315,8 @@ void Paddle::moveRightPaddle(SDL_Event& e,SDL_Rect &rightPaddleRect,SDL_Renderer
 {
     if(e.type == SDL_KEYDOWN)
     {
-        leftPaddle.moveLeftPaddle(gameBall,leftPaddleRect);
-        gameBall.moveBall(gRenderer,ballRect);
+       // leftPaddle.moveLeftPaddle(gameBall,leftPaddleRect);
+     //   gameBall.moveBall(gRenderer,ballRect);
         switch(e.key.keysym.sym)
         {
             case SDLK_UP:
