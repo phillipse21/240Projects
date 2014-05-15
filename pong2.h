@@ -37,6 +37,8 @@ public:
     int getHeight();
     void resetBall(int desitinationX);
     void setDestinationXandY();
+    void setDestinationX(int x);
+    void setDestinationY(int y);
     void findSlope();
     void moveBall(SDL_Renderer* gRenderer, SDL_Rect &ballRect);
     void renderBall(SDL_Renderer* gRenderer, SDL_Rect &ballRect);
@@ -71,6 +73,7 @@ public:
     int getSpeed();
     int getDestinationY();
     bool getCollision();
+    int getMidPaddle();
     void setCollision(bool collision);
     void renderPaddle(SDL_Renderer* gRenderer, SDL_Rect &paddleRect);
     void moveLeftPaddle(Ball gameBall,SDL_Rect &leftPaddleRect);
@@ -84,6 +87,8 @@ private:
     int bottomY;
     int speed;
     int destinationY;
+    int midPaddle;
+    unsigned int distanceFromMiddle;
     int randomDirection;
     bool collision;
 };

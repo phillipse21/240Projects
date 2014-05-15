@@ -46,6 +46,20 @@ int Ball::getSlopeY()
     return slopeY;
 }
 
+int Ball::getDistanceX()
+{
+    if(currentX < destinationX)
+        distanceX = currentX - destinationX;
+    else
+        distanceX = destinationX - currentX;
+    return distanceX;
+}
+
+int Ball::getDistanceY()
+{
+    return distanceY;
+}
+
 int Ball::getWidth()
 {
     return WIDTH;
@@ -68,6 +82,17 @@ void Ball::setDestinationXandY()
 {
 
 }
+
+void Ball::setDestinationX(int x)
+{
+    this -> destinationX = x;
+}
+
+void Ball::setDestinationY(int y)
+{
+    this -> destinationY = y;
+}
+
 
 void Ball::findSlope()
 {
@@ -178,7 +203,9 @@ Paddle::Paddle()
     X = 0;
     topY = 0;
     bottomY = 0;
+    midPaddle = 0;
     speed = 15;
+    destinationY = 0;
     randomDirection = rand() % 2 + 1;
     collision = false;
 }
@@ -249,6 +276,11 @@ void Paddle::setCollision(bool collision)
     this -> collision = collision;
 }
 
+int Paddle::getMidPaddle()
+{
+    return midPaddle;
+}
+
 void Paddle::renderPaddle(SDL_Renderer* gRenderer,SDL_Rect &paddleRect)
 {
     SDL_SetRenderDrawColor(gRenderer,255,255,255,255);
@@ -266,6 +298,7 @@ void Paddle::moveLeftPaddle(Ball gameBall,SDL_Rect &leftPaddleRect)
         {
             topY = topY - speed;
             bottomY = topY + HEIGHT;
+            midPaddle = topY + (HEIGHT/2);
             leftPaddleRect.y = topY;
 
         }
@@ -273,6 +306,7 @@ void Paddle::moveLeftPaddle(Ball gameBall,SDL_Rect &leftPaddleRect)
         {
             topY = topY + speed;
             bottomY = topY + HEIGHT;
+            midPaddle = topY + (HEIGHT/2);
             leftPaddleRect.y = topY;
         }
     }
@@ -284,6 +318,7 @@ void Paddle::moveLeftPaddle(Ball gameBall,SDL_Rect &leftPaddleRect)
             if(bottomY + speed <= SCREEN_HEIGHT)
                 topY = topY - speed;
                 bottomY = topY + HEIGHT;
+                midPaddle = topY + (HEIGHT/2);
                 leftPaddleRect.y = topY;
         }
         else//move up at half speed
@@ -291,6 +326,7 @@ void Paddle::moveLeftPaddle(Ball gameBall,SDL_Rect &leftPaddleRect)
             if(getTopY() - getSpeed() >= 0)
                 topY = topY + speed;
                 bottomY = topY + HEIGHT;
+                midPaddle = topY + (HEIGHT/2);
                 leftPaddleRect.y = topY;
         }
     }
