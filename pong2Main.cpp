@@ -106,6 +106,410 @@ bool loadMedia()
 	return success;
 }
 
+void ScoreBoard(SDL_Renderer* gRenderer,int playerScore,int computerScore)
+{
+    int playerX = 350;
+    int playerY = 10;
+    int computerX = 250;
+    int computerY = 10;
+
+    SDL_Rect zeroSide = {-10,-10,10,30};
+    SDL_Rect zeroTop = {-10,-10,20,10};
+    SDL_Rect zeroRSide = {-10,-10,10,30};
+    SDL_Rect zeroBottom = {10,-10,20,10};
+    SDL_Rect one = {-10,-10,10,40};
+    SDL_Rect twoHang {-10,-10,10,20};
+    SDL_Rect twoTop = {-10,10,30,10};
+    SDL_Rect twoSide = {-10,10,10,30};
+    SDL_Rect twoMid = {-10,-10,20,10};
+    SDL_Rect threeSide = {-10,-10,10,50};
+    SDL_Rect threeLayer = {-10,-10,30,10};
+    SDL_Rect fourSide = {-10,-10,10,50};
+    SDL_Rect shortSide = {-10,-10,10,20};
+    SDL_Rect fourLayer = {-10,-10,30,10};
+    SDL_Rect fiveVertical = {-10,-10,10,30};
+    SDL_Rect fiveHorizontal = {-10,-10,30,10};
+    SDL_Rect sixVertical = {-10,-10,10,30};
+    SDL_Rect sixHorizontal = {-10,-10,30,10};
+    SDL_Rect sevenHorizontal = {-10,-10,20,10};
+    SDL_Rect sevenVertical = {-10,-10,10,50};
+    SDL_Rect eightSide = {-10,-10,10,50};
+    SDL_Rect eightLayer = {-10,-10,30,10};
+    SDL_Rect nineHorizontal = {-10,-10,20,10};
+    SDL_Rect nineVertical = {-10,-10,10,50};
+
+    SDL_SetRenderDrawColor(gRenderer,255,255,255,255);
+    switch(playerScore)
+    {
+        case 0:
+            zeroSide.x = playerX;
+            zeroSide.y = playerY;
+            zeroRSide.x = playerX + 30;
+            zeroRSide.y = playerY;
+            zeroTop.x = playerX+10;
+            zeroTop.y = 0;
+            zeroBottom.x = playerX+10;
+            zeroBottom.y = playerY+30;
+            SDL_RenderFillRect(gRenderer,&zeroSide);
+            SDL_RenderFillRect(gRenderer,&zeroRSide);
+            SDL_RenderFillRect(gRenderer,&zeroTop);
+            SDL_RenderFillRect(gRenderer,&zeroBottom);
+            break;
+        case 1:
+            one.x = playerX;
+            one.y = playerY;
+            SDL_RenderFillRect(gRenderer,&one);
+            SDL_RenderPresent(gRenderer);
+            break;
+        case 2:
+            twoHang.x = playerX;
+            twoHang.y = playerY;
+            twoTop.x = playerX;
+            twoTop.y = playerY;
+            twoSide.x = playerX+30;
+            twoSide.y = playerY;
+            twoMid.x = playerX + 10;
+            twoMid.y = playerY + 30;
+            SDL_RenderFillRect(gRenderer,&twoHang);
+            SDL_RenderFillRect(gRenderer,&twoTop);
+            SDL_RenderFillRect(gRenderer,&twoSide);
+            SDL_RenderFillRect(gRenderer,&twoMid);
+            SDL_RenderPresent(gRenderer);
+            twoSide.x = playerX;
+            twoSide.y = playerY + 30;
+            twoTop.x = playerX + 10;
+            twoTop.y = playerY + 50;
+            SDL_RenderFillRect(gRenderer,&twoSide);
+            SDL_RenderFillRect(gRenderer,&twoTop);
+            SDL_RenderPresent(gRenderer);
+            break;
+        case 3:
+            threeSide.x = playerX+30;
+            threeSide.y = playerY;
+            SDL_RenderFillRect(gRenderer,&threeSide);
+            threeLayer.x = playerX;
+            threeLayer.y = playerY;
+            SDL_RenderFillRect(gRenderer,&threeLayer);
+            SDL_RenderPresent(gRenderer);
+            threeLayer.y = playerY + 20;
+            SDL_RenderFillRect(gRenderer,&threeLayer);
+            SDL_RenderPresent(gRenderer);
+            threeLayer.y = playerY + 40;
+            SDL_RenderFillRect(gRenderer,&threeLayer);
+            SDL_RenderPresent(gRenderer);
+            break;
+        case 4:
+            fourSide.x = playerX + 30;
+            fourSide.y = playerY;
+            shortSide.x = playerX;
+            shortSide.y = playerY;
+            fourLayer.x = playerX;
+            fourLayer.y = playerY+20;
+            SDL_RenderFillRect(gRenderer,&fourSide);
+            SDL_RenderFillRect(gRenderer,&shortSide);
+            SDL_RenderFillRect(gRenderer,&fourLayer);
+            SDL_RenderPresent(gRenderer);
+            break;
+        case5:
+            fiveVertical.x = playerX;
+            fiveVertical.y = playerY;
+            fiveHorizontal.x = playerX;
+            fiveHorizontal.y = playerY;
+            SDL_RenderFillRect(gRenderer,&fiveVertical);
+            SDL_RenderFillRect(gRenderer,&fiveHorizontal);
+            SDL_RenderPresent(gRenderer);
+            fiveHorizontal.x = playerX+10;
+            fiveHorizontal.y = playerY+20;
+            fiveHorizontal.w = 10;
+            fiveVertical.x = playerX+20;
+            fiveVertical.y = playerY+20;
+            fiveVertical.h = 30;
+            SDL_RenderFillRect(gRenderer,&fiveVertical);
+            SDL_RenderFillRect(gRenderer,&fiveHorizontal);
+            SDL_RenderPresent(gRenderer);
+            fiveHorizontal.x = playerX;
+            fiveHorizontal.y = playerY + 40;
+            fiveHorizontal.w = 30;
+            SDL_RenderFillRect(gRenderer,&fiveHorizontal);
+            SDL_RenderPresent(gRenderer);
+            break;
+        case 6:
+            sixVertical.x = playerX;
+            sixVertical.y = playerY;
+            sixVertical.h = 40;
+            sixHorizontal.x = playerX;
+            sixHorizontal.y = playerY;
+            SDL_RenderFillRect(gRenderer,&sixVertical);
+            SDL_RenderFillRect(gRenderer,&sixHorizontal);
+            SDL_RenderPresent(gRenderer);
+            sixHorizontal.x = playerX+10;
+            sixHorizontal.y = playerY+20;
+            sixHorizontal.w = 10;
+            sixVertical.x = playerX+20;
+            sixVertical.y = playerY+20;
+            sixVertical.h = 30;
+            SDL_RenderFillRect(gRenderer,&sixVertical);
+            SDL_RenderFillRect(gRenderer,&sixHorizontal);
+            SDL_RenderPresent(gRenderer);
+            sixHorizontal.x = playerX;
+            sixHorizontal.y = playerY + 40;
+            sixHorizontal.w = 30;
+            SDL_RenderFillRect(gRenderer,&sixHorizontal);
+            SDL_RenderPresent(gRenderer);
+            break;
+        case 7:
+            sevenHorizontal.x = playerX;
+            sevenHorizontal.y = playerY;
+            sevenVertical.x = playerX+20;
+            sevenVertical.y = playerY;
+            SDL_RenderFillRect(gRenderer,&sevenHorizontal);
+            SDL_RenderFillRect(gRenderer,&sevenVertical);
+            SDL_RenderPresent(gRenderer);
+            break;
+        case8:
+            eightSide.x = playerX+30;
+            eightSide.y = playerY;
+            SDL_RenderFillRect(gRenderer,&eightSide);
+            eightLayer.x = playerX;
+            eightLayer.y = playerY;
+            SDL_RenderFillRect(gRenderer,&eightLayer);
+            SDL_RenderPresent(gRenderer);
+            eightLayer.y = playerY + 20;
+            SDL_RenderFillRect(gRenderer,&eightLayer);
+            SDL_RenderPresent(gRenderer);
+            eightLayer.y = playerY + 40;
+            SDL_RenderFillRect(gRenderer,&eightLayer);
+            SDL_RenderPresent(gRenderer);
+            eightSide.x = playerX;
+            eightSide.y = playerY;
+            SDL_RenderFillRect(gRenderer,&eightSide);
+            SDL_RenderPresent(gRenderer);
+            break;
+        case 9:
+            nineHorizontal.x = playerX;
+            nineHorizontal.y = playerY;
+            nineVertical.x = playerX+20;
+            nineVertical.y = playerY;
+            SDL_RenderFillRect(gRenderer,&nineHorizontal);
+            SDL_RenderFillRect(gRenderer,&nineVertical);
+            SDL_RenderPresent(gRenderer);
+            nineVertical.x = playerX;
+            nineVertical.y = playerY;
+            nineVertical.h = 30;
+            nineHorizontal.x = playerX;
+            nineHorizontal.y = playerY + 20;
+            SDL_RenderFillRect(gRenderer,&nineHorizontal);
+            SDL_RenderFillRect(gRenderer,&nineVertical);
+            SDL_RenderPresent(gRenderer);
+            break;
+        case 10:
+            one.x = playerX;
+            one.y = playerY;
+            SDL_RenderFillRect(gRenderer,&one);
+            SDL_RenderPresent(gRenderer);
+            zeroSide.x = playerX + 30;
+            zeroSide.y = playerY;
+            zeroRSide.x = playerX + 60;
+            zeroRSide.y = playerY;
+            zeroTop.x = playerX+40;
+            zeroTop.y = 0;
+            zeroBottom.x = playerX+40;
+            zeroBottom.y = playerY+30;
+            SDL_RenderFillRect(gRenderer,&zeroSide);
+            SDL_RenderFillRect(gRenderer,&zeroRSide);
+            SDL_RenderFillRect(gRenderer,&zeroTop);
+            SDL_RenderFillRect(gRenderer,&zeroBottom);
+            SDL_RenderPresent(gRenderer);
+            break;
+    }
+
+     switch(computerScore)
+    {
+        case 0:
+            zeroSide.x = computerX;
+            zeroSide.y = computerY;
+            zeroRSide.x = computerX + 30;
+            zeroRSide.y = computerY;
+            zeroTop.x = computerX+10;
+            zeroTop.y = 0;
+            zeroBottom.x = computerX+10;
+            zeroBottom.y = computerY+30;
+            SDL_RenderFillRect(gRenderer,&zeroSide);
+            SDL_RenderFillRect(gRenderer,&zeroRSide);
+            SDL_RenderFillRect(gRenderer,&zeroTop);
+            SDL_RenderFillRect(gRenderer,&zeroBottom);
+            break;
+        case 1:
+            one.x = computerX;
+            one.y = computerY;
+            SDL_RenderFillRect(gRenderer,&one);
+            SDL_RenderPresent(gRenderer);
+            break;
+        case 2:
+            twoHang.x = computerX;
+            twoHang.y = computerY;
+            twoTop.x = computerX;
+            twoTop.y = computerY;
+            twoSide.x = computerX+30;
+            twoSide.y = computerY;
+            twoMid.x = computerX + 10;
+            twoMid.y = computerY + 30;
+            SDL_RenderFillRect(gRenderer,&twoHang);
+            SDL_RenderFillRect(gRenderer,&twoTop);
+            SDL_RenderFillRect(gRenderer,&twoSide);
+            SDL_RenderFillRect(gRenderer,&twoMid);
+            SDL_RenderPresent(gRenderer);
+            twoSide.x = computerX;
+            twoSide.y = computerY + 30;
+            twoTop.x = computerX + 10;
+            twoTop.y = computerY + 50;
+            SDL_RenderFillRect(gRenderer,&twoSide);
+            SDL_RenderFillRect(gRenderer,&twoTop);
+            SDL_RenderPresent(gRenderer);
+            break;
+        case 3:
+            threeSide.x = computerX+30;
+            threeSide.y = computerY;
+            SDL_RenderFillRect(gRenderer,&threeSide);
+            threeLayer.x = computerX;
+            threeLayer.y = computerY;
+            SDL_RenderFillRect(gRenderer,&threeLayer);
+            SDL_RenderPresent(gRenderer);
+            threeLayer.y = computerY + 20;
+            SDL_RenderFillRect(gRenderer,&threeLayer);
+            SDL_RenderPresent(gRenderer);
+            threeLayer.y = computerY + 40;
+            SDL_RenderFillRect(gRenderer,&threeLayer);
+            SDL_RenderPresent(gRenderer);
+            break;
+        case 4:
+            fourSide.x = computerX + 30;
+            fourSide.y = computerY;
+            shortSide.x = computerX;
+            shortSide.y = computerY;
+            fourLayer.x = computerX;
+            fourLayer.y = computerY+20;
+            SDL_RenderFillRect(gRenderer,&fourSide);
+            SDL_RenderFillRect(gRenderer,&shortSide);
+            SDL_RenderFillRect(gRenderer,&fourLayer);
+            SDL_RenderPresent(gRenderer);
+            break;
+        case 5:
+            fiveVertical.x = computerX;
+            fiveVertical.y = computerY;
+            fiveHorizontal.x = computerX;
+            fiveHorizontal.y = computerY;
+            SDL_RenderFillRect(gRenderer,&fiveVertical);
+            SDL_RenderFillRect(gRenderer,&fiveHorizontal);
+            SDL_RenderPresent(gRenderer);
+            fiveHorizontal.x = computerX+10;
+            fiveHorizontal.y = computerY+20;
+            fiveHorizontal.w = 10;
+            fiveVertical.x = computerX+20;
+            fiveVertical.y = computerY+20;
+            fiveVertical.h = 30;
+            SDL_RenderFillRect(gRenderer,&fiveVertical);
+            SDL_RenderFillRect(gRenderer,&fiveHorizontal);
+            SDL_RenderPresent(gRenderer);
+            fiveHorizontal.x = computerX;
+            fiveHorizontal.y = computerY + 40;
+            fiveHorizontal.w = 30;
+            SDL_RenderFillRect(gRenderer,&fiveHorizontal);
+            SDL_RenderPresent(gRenderer);
+            break;
+        case 6:
+            sixVertical.x = computerX;
+            sixVertical.y = computerY;
+            sixVertical.h = 40;
+            sixHorizontal.x = computerX;
+            sixHorizontal.y = computerY;
+            SDL_RenderFillRect(gRenderer,&sixVertical);
+            SDL_RenderFillRect(gRenderer,&sixHorizontal);
+            SDL_RenderPresent(gRenderer);
+            sixHorizontal.x = computerX+10;
+            sixHorizontal.y = computerY+20;
+            sixHorizontal.w = 10;
+            sixVertical.x = computerX+20;
+            sixVertical.y = computerY+20;
+            sixVertical.h = 30;
+            SDL_RenderFillRect(gRenderer,&sixVertical);
+            SDL_RenderFillRect(gRenderer,&sixHorizontal);
+            SDL_RenderPresent(gRenderer);
+            sixHorizontal.x = computerX;
+            sixHorizontal.y = computerY + 40;
+            sixHorizontal.w = 30;
+            SDL_RenderFillRect(gRenderer,&sixHorizontal);
+            SDL_RenderPresent(gRenderer);
+            break;
+        case 7:
+            sevenHorizontal.x = computerX;
+            sevenHorizontal.y = computerY;
+            sevenVertical.x = computerX+20;
+            sevenVertical.y = computerY;
+            SDL_RenderFillRect(gRenderer,&sevenHorizontal);
+            SDL_RenderFillRect(gRenderer,&sevenVertical);
+            SDL_RenderPresent(gRenderer);
+            break;
+        case 8:
+            eightSide.x = computerX+30;
+            eightSide.y = computerY;
+            SDL_RenderFillRect(gRenderer,&eightSide);
+            eightLayer.x = computerX;
+            eightLayer.y = computerY;
+            SDL_RenderFillRect(gRenderer,&eightLayer);
+            SDL_RenderPresent(gRenderer);
+            eightLayer.y = computerY + 20;
+            SDL_RenderFillRect(gRenderer,&eightLayer);
+            SDL_RenderPresent(gRenderer);
+            eightLayer.y = computerY + 40;
+            SDL_RenderFillRect(gRenderer,&eightLayer);
+            SDL_RenderPresent(gRenderer);
+            eightSide.x = computerX;
+            eightSide.y = computerY;
+            SDL_RenderFillRect(gRenderer,&eightSide);
+            SDL_RenderPresent(gRenderer);
+            break;
+        case 9:
+            nineHorizontal.x = computerX;
+            nineHorizontal.y = computerY;
+            nineVertical.x = computerX+20;
+            nineVertical.y = computerY;
+            SDL_RenderFillRect(gRenderer,&nineHorizontal);
+            SDL_RenderFillRect(gRenderer,&nineVertical);
+            SDL_RenderPresent(gRenderer);
+            nineVertical.x = computerX;
+            nineVertical.y = computerY;
+            nineVertical.h = 30;
+            nineHorizontal.x = computerX;
+            nineHorizontal.y = computerY + 20;
+            SDL_RenderFillRect(gRenderer,&nineHorizontal);
+            SDL_RenderFillRect(gRenderer,&nineVertical);
+            SDL_RenderPresent(gRenderer);
+            break;
+        case 10:
+            one.x = computerX;
+            one.y = computerY;
+            SDL_RenderFillRect(gRenderer,&one);
+            SDL_RenderPresent(gRenderer);
+            zeroSide.x = computerX + 30;
+            zeroSide.y = computerY;
+            zeroRSide.x = computerX + 60;
+            zeroRSide.y = computerY;
+            zeroTop.x = computerX+40;
+            zeroTop.y = 0;
+            zeroBottom.x = computerX+40;
+            zeroBottom.y = computerY+30;
+            SDL_RenderFillRect(gRenderer,&zeroSide);
+            SDL_RenderFillRect(gRenderer,&zeroRSide);
+            SDL_RenderFillRect(gRenderer,&zeroTop);
+            SDL_RenderFillRect(gRenderer,&zeroBottom);
+            SDL_RenderPresent(gRenderer);
+            break;
+    }
+
+
+}
+
 //load texture
 void loadTexture()
 {
@@ -362,6 +766,8 @@ int main( int argc, char* args[] )
                         checkCollision(gameBall,rightPaddle,leftPaddle,ballRect);
                         leftPaddle.moveLeftPaddle(gameBall,leftPaddleRect);
                         leftPaddle.renderPaddle(gRenderer,leftPaddleRect);
+
+                        ScoreBoard(gRenderer,playerScore,computerScore);
 
 
                     }//end of while e has pollevent

@@ -12,7 +12,7 @@ Ball::Ball()
     currentY = SCREEN_HEIGHT/2;
     slopeX = 0;
     slopeY = 0;
-    speed = 10;
+    speed = 20;
     findSlope();
 }
 
@@ -103,7 +103,6 @@ void Ball::setDestinationYIndividually(int y,int midPoint)
     else
         destinationY = destinationY + y;
 }
-
 
 void Ball::findSlope()
 {
