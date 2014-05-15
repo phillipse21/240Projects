@@ -1,0 +1,120 @@
+Test getX: 0
+Test getY: 0
+Test getX after setX: 5
+Test getY after setY: 7
+
+
+Test Character name: Cat
+Test Character X: 2
+Test Character Y: 1
+Test Character dead: 1
+Test Character dead: 0
+Test Character starvation: 1
+
+
+Test getGameNumber: 0
+Test getEndOfGame: 
+
+Test getGameNumber: 3
+Test getEndOfGame: Mouse drowned
+
+Test waterVector: 
+0. X: 0
+    Y: 0
+1. X: 1
+    Y: 0
+2. X: 2
+    Y: 0
+3. X: 3
+    Y: 0
+4. X: 4
+    Y: 0
+5. X: 5
+    Y: 0
+6. X: 6
+    Y: 0
+7. X: 7
+    Y: 0
+8. X: 8
+    Y: 0
+9. X: 9
+    Y: 0
+10. X: 10
+    Y: 0
+11. X: 0
+    Y: 10
+12. X: 1
+    Y: 10
+13. X: 2
+    Y: 10
+14. X: 3
+    Y: 10
+15. X: 4
+    Y: 10
+16. X: 5
+    Y: 10
+17. X: 6
+    Y: 10
+18. X: 7
+    Y: 10
+19. X: 8
+    Y: 10
+20. X: 9
+    Y: 10
+21. X: 10
+    Y: 10
+22. X: 0
+    Y: 10
+23. X: 1
+    Y: 10
+24. X: 2
+    Y: 10
+25. X: 3
+    Y: 10
+26. X: 4
+    Y: 10
+27. X: 5
+    Y: 10
+28. X: 6
+    Y: 10
+29. X: 7
+    Y: 10
+30. X: 8
+    Y: 10
+31. X: 9
+    Y: 10
+32. X: 10
+    Y: 10
+
+
+Test bridgeVector: 
+0. X: 0
+   Y: 0
+1. X: 5
+   Y: 0
+2. X: 0
+   Y: 36974
+
+
+Test foodVector: 
+0. X: 3
+   Y: 5
+1. X: 7
+   Y: 9
+2. X: 1
+   Y: 3
+
+
+Test mouseHoleVector: 
+0. X: 1
+   Y: 5
+1. X: 2
+   Y: 7
+
+
+Test gameEndingsVector: 
+Game 1      Cat ate mouse
+Game 2      Cat ate mouse
+Game 3      Cat ate mouse
+Game 4      Cat ate mouse
+Game 5      Cat ate mouse
